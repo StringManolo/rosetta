@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-  fmt.Print(sum(1, 2));
+  fmt.Print(add(1, 2));
 }
 
-func sum(num1, num2 int) (int) {
+func add(num1, num2 int) (int) {
   return num1 + num2;
 }
