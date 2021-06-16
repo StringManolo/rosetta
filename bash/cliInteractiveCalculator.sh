@@ -39,7 +39,7 @@ Bash Calculator:
 
 Select an option: ' selectedOption;
 
-  local -n returnVal=$1;
+  local -n _returnVal=$1;
   case $selectedOption in 
     1 )
       getNumbers num1 num2;
@@ -66,7 +66,7 @@ Select an option: ' selectedOption;
       ;;
 
     0 )
-      returnVal=1;;
+      _returnVal=1;;
 
     * )
       echo "Please, write a number from 0 to 4 and press enter";;
