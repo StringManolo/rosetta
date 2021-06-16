@@ -43,7 +43,6 @@ Select an option: ' selectedOption;
   case $selectedOption in 
     1 )
       getNumbers num1 num2;
-echo "Adding $num1 + $num2";
       addition num1 num2 result;
       echo "Result: $result";
       ;;
