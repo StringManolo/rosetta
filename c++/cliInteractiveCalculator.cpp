@@ -38,16 +38,18 @@ void getNumbers(int * num1, int * num2) {
 }
 
 int calculator() {
-  cout << "\n\nC++ Calculator:\n\
-\n\
-  1 - Addition\n\
-  2 - Substraction\n\
-  3 - Multiplication\n\
-  4 - Division\n\
-\n\
-  0 - Exit\n\
-\n\
-Select an option: ";
+  cout << R"(
+
+C++ Calculator:
+
+  1 - Addition
+  2 - Substraction
+  3 - Multiplication
+  4 - Division
+
+  0 - Exit
+
+Select an option: )";
   unsigned short int selectedOption;
   cin >> selectedOption;
 
