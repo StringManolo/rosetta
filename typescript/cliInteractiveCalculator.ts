@@ -1,14 +1,22 @@
 // Node.js
-const fs = require("fs");
+import * as fs from "fs";
 
-const calculator = () => {
-  const printAtSameLine = text => {
-    const open = (filename, mode) => {
-      let fd = {};
+interface fileDescriptor {
+  internalFd: number,
+  read(buffer: Buffer, position: number, len: number): number,
+  puts(str: string): number,
+  close(): void
+}
+
+const calculator = (): 0 | 1 => {
+  const printAtSameLine = (text: string): void => {
+    const open = (filename: string, mode: string): fileDescriptor => {
+      const fd: fileDescriptor = {} as any;
       fd.internalFd = fs.openSync(filename, mode);
-      fd.read = (buffer, position, len) => fs.readSync(fd.internalFd, buffer, position, len);
+      fd.read = (buffer, position, len) => fs.readSync(fd.internalFd, buffer, position, len, null);
       fd.puts = (str) => fs.writeSync(fd.internalFd, str);
       fd.close = () => fs.closeSync(fd.internalFd);
+
       return fd;
     }
 
@@ -17,12 +25,13 @@ const calculator = () => {
     fd.close();
   }
 
-  const promptForInput = text => {
-    printAtSameLine(text);//console.log adds newline at end of input
-    let rtnval = "";
-    let buffer = Buffer.alloc ? Buffer.alloc(1) : new Buffer(1);
+
+  const promptForInput = (text: string): string => {
+    printAtSameLine(text); // console.log adds newline at end of input
+    let rtnval: string = "";
+    let buffer: Buffer = Buffer.alloc ? Buffer.alloc(1) : new Buffer(1);
     for(;;) {
-      fs.readSync(0, buffer, 0, 1);
+      fs.readSync(0, buffer, 0, 1, null);
       if(buffer[0] === 10) {
         break;
       } else if(buffer[0] !== 13) {
@@ -32,16 +41,16 @@ const calculator = () => {
     return rtnval;
   }
 
-  const getNumbers = () => {
+  const getNumbers = (): [number, number] => {
     return [+promptForInput("First number: "), +promptForInput("Second number: ")];
   }
 
-  const addition = (num1, num2) => num1 + num2;
-  const substraction = (num1, num2) => num1 - num2;
-  const multiplication = (num1, num2) => num1 * num2;
-  const division = (num1, num2) => num1 / num2;
+  const addition = (num1: number, num2: number): number => num1 + num2;
+  const substraction = (num1: number, num2: number): number => num1 - num2;
+  const multiplication = (num1: number, num2: number): number => num1 * num2;
+  const division = (num1: number, num2: number): number => num1 / num2;
 
-  const selectedOption = +promptForInput(`
+  const selectedOption: number = +promptForInput(`
 
 Javascript Calculator:
 
@@ -54,7 +63,7 @@ Javascript Calculator:
 
 Select an option: `);
 
-  let num1, num2;
+  let num1: number, num2: number;
   switch(selectedOption) {
     case 1: 
       [num1, num2] = getNumbers();
@@ -82,6 +91,8 @@ Select an option: `);
     default:
       console.log("Please, write a number from 0 to 4 and press enter");
   }
+  return 0;
 }
+
 
 while(!calculator());
