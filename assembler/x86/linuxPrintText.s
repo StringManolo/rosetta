@@ -1,12 +1,12 @@
 
-# Compile
-# nasm -f elf32 -o linuxPrintText.o linuxPrintText.s
+; Compile
+; nasm -f elf32 -o linuxPrintText.o linuxPrintText.s
 
-# Link
-# i686-linux-gnu-ld linuxPrintText.o -o linuxPrintText
+; Link
+; i686-linux-gnu-ld linuxPrintText.o -o linuxPrintText
 
-# Run
-# qemu-i386 linuxPrintText
+; Run
+; qemu-i386 linuxPrintText
 
 
 global _start           ; Entry point of the program
